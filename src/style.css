@@ -1,0 +1,37 @@
+.wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.slide.appear, .slide.enter {
+  transform: translateY(-100px);
+  opacity: 0.2;
+}
+
+.slide.appearActive, .slide.enterActive {
+  transform: translateY(0);
+  transition: all 0.35s cubic-bezier(0.02, 0.82, 0.29, 0.99);
+  opacity: 1;
+}
+
+.scale.appear, .scale.enter {
+  transform: scale(0.6);
+  opacity: 0.4;
+}
+
+.scale.appearActive, .scale.enterActive {
+  transform: scale(1);
+  transition: all 0.35s cubic-bezier(0.02, 0.82, 0.29, 0.99);
+  opacity: 1;
+}
+
+.leave {
+  opacity: 1;
+}
+.leaveActive {
+  transform: translateY(-100px);
+  opacity: 0;
+  transition: all 0.2s cubic-bezier(0.74, 0.02, 0.99, 0.35);
+}
