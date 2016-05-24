@@ -1,6 +1,6 @@
 {
   "name": "rc-minidialog",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Minimal dialog component",
   "keywords": [
     "react-dialog",
