@@ -32,6 +32,7 @@ name   | type   | default    | description
 -------| ------ | ---------- | ------------
 *show   | boolean| false      | Show the dialog if true
 overlay | boolean | true     | Whether to have overlay element
+overlayStyle| Object | null  | Style for overlay element, only used when overlay is true
 effect | string | 'slide'    | Effect for show dialog, could be 'slide' 'scale' or ''
 transitionName | string | ''     | [Traisntion className](https://facebook.github.io/react/docs/animation.html) for dialog traisition, override `effect`
 top    | number | 150        | Shortcut of style.position.top

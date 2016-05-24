@@ -44,6 +44,7 @@ export default class Dialog extends Component {
   static propTypes = {
     show: PropTypes.bool.isRequired,
     overlay: PropTypes.bool,
+    overlayStyle: PropTypes.object,
     effect: PropTypes.oneOf(['slide', 'scale']),
     transitionName: PropTypes.string,
     top: PropTypes.number,
@@ -94,7 +95,7 @@ export default class Dialog extends Component {
       return (
         <div className={style.wrapper}>
           {do {
-            if (props.overlay) { <Overlay show={props.show}/> }
+            if (props.overlay) { <Overlay show={props.show} style={props.overlayStyle}/> }
           }}
           <TransitionGroup
             component={FirstChild}
