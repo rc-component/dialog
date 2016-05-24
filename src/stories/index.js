@@ -73,7 +73,7 @@ storiesOf('Dialog', module)
           <div>
             <button onClick={this.toggle}>toggle</button>
             <div style={boxStyles}>
-              <Dialog style={dialogStyles} transitionName='' top={60} width={100} show={this.state.show}>
+              <Dialog style={dialogStyles} effect='scale' top={60} width={100} show={this.state.show}>
                 <Close onClick={e => {
                   e.preventDefault()
                   this.setState({
