@@ -61,19 +61,31 @@ storiesOf('Dialog', module)
   .add('scale dialog', () => {
     let Foo = React.createClass({
       getInitialState: function () {
-        return {show: true}
+        return {show: true, overlay: true}
       },
       toggle: function () {
         this.setState({
           show: !this.state.show
         })
       },
+      toggleOverlay: function () {
+        this.setState({
+          overlay: !this.state.overlay
+        })
+      },
       render: function() {
         return (
           <div>
+            <button onClick={this.toggleOverlay}>toggle overlay</button>
             <button onClick={this.toggle}>toggle</button>
             <div style={boxStyles}>
-              <Dialog style={dialogStyles} effect='scale' top={60} width={100} show={this.state.show}>
+              <Dialog
+                style={dialogStyles}
+                overlay={this.state.overlay}
+                effect='scale'
+                top={60}
+                width={100}
+                show={this.state.show}>
                 <Close onClick={e => {
                   e.preventDefault()
                   this.setState({

@@ -93,7 +93,9 @@ export default class Dialog extends Component {
     let clz = cx(props.className, style[props.effect])
       return (
         <div className={style.wrapper}>
-          <Overlay show={props.show}/>
+          {do {
+            if (props.overlay) { <Overlay show={props.show}/> }
+          }}
           <TransitionGroup
             component={FirstChild}
             transitionAppearTimeout={200}
