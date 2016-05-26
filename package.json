@@ -1,9 +1,9 @@
 {
   "name": "rc-minidialog",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Minimal dialog component",
   "keywords": [
-    "react-dialog",
+    "react-component",
     "dialog"
   ],
   "repository": {
