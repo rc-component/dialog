@@ -28,21 +28,20 @@ Build with [webpack](https://webpack.github.io/) and [CSS Modules](https://githu
 
 ## Props
 
-name   | type   | default    | description
--------| ------ | ---------- | ------------
+name    | type   | default    | description
+--------| ------ | ---------- | ------------
 *show   | boolean| false      | Show the dialog if true
-overlay | boolean | true     | Whether to have overlay element
-overlayStyle| Object | null  | Style for overlay element, only used when overlay is true
-effect | string | 'slide'    | Effect for show dialog, could be 'slide' 'scale' or ''
-transitionName | string | ''     | [Traisntion className](https://facebook.github.io/react/docs/animation.html) for dialog traisition, override `effect`
-top    | number | 150        | Shortcut of style.position.top
-width | number | 300         | Shortcut of style.width
+overlay | boolean| true       | Whether to have overlay element
+top     | number | 150        | Shortcut of style.position.top
+width   | number | 300        | Shortcut of style.width
+exitStyle   | Object | {opacity: 0.3} | style object for exted status
+overlayStyle| Object | null   | Style for overlay element, only used when overlay is true
 
 `style` and `className` apply to underneath dialog element.
 
 # License
 
-Copyright 2016 chemzqm@gmail.com
+Copyright 2016-2017 chemzqm@gmail.com
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the "Software"),

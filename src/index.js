@@ -1,21 +1,21 @@
-import React, { Component, PropTypes, Children} from 'react'
+import React, { Component } from 'react'
 import ReactDom from 'react-dom'
-import TransitionGroup from 'react-addons-css-transition-group'
+import PropTypes from 'prop-types'
 import Overlay from 'rc-overlay'
-import style from './style.css'
-import cx from 'classnames'
 import assign from 'object-assign'
 import computedStyle from 'computed-style'
+import Transition from 'react-transition-group/Transition'
 
 const doc = document.documentElement
 const vh = Math.max(doc.clientHeight, window.innerHeight || 0)
+const wrapperStyle= {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  bottom: 0,
+  right: 0
+}
 
-const FirstChild = React.createClass({
-  render: function() {
-    let children = Children.toArray(this.props.children)
-    return children[0] || null
-  }
-})
 
 const body = document.body
 function findPostionedElement(el) {
@@ -37,16 +37,17 @@ export default class Dialog extends Component {
   static defaultProps = {
     show: false,
     overlay: true,
-    effect: 'slide',
     top: 150,
-    width: 300
+    width: 300,
+    exitStyle: {
+      opacity: 0.3
+    }
   }
   static propTypes = {
     show: PropTypes.bool.isRequired,
     overlay: PropTypes.bool,
     overlayStyle: PropTypes.object,
-    effect: PropTypes.oneOf(['slide', 'scale']),
-    transitionName: PropTypes.string,
+    exitStyle: PropTypes.object,
     top: PropTypes.number,
     width: PropTypes.number
   }
@@ -57,11 +58,10 @@ export default class Dialog extends Component {
     let el = this.el = ReactDom.findDOMNode(this)
     let pel = findPostionedElement(el)
     if (pel === document.body) {
-      el.style.width  = body.clientWidth + 'px'
       el.style.height = Math.max(body.clientHeight, vh) + 'px'
     }
-    this.positionDialog()
     if (!this.props.show) el.style.display = 'none'
+    this.positionDialog()
   }
   componentWillReceiveProps(props) {
     if (!props.show) {
@@ -75,10 +75,9 @@ export default class Dialog extends Component {
     }
   }
   positionDialog() {
-    if (this.props.show) {
-      let dialog = this.refs.dialog
-      let dw = parseInt(dialog.style.width, 10)
-      dialog.style.left = (this.el.clientWidth - dw)/2 + 'px'
+    if (this.props.show && this.dialog) {
+      let dw = parseInt(this.dialog.style.width, 10)
+      this.dialog.style.left = (this.el.clientWidth - dw)/2 + 'px'
     }
   }
   componentDidUpdate() {
@@ -86,36 +85,34 @@ export default class Dialog extends Component {
   }
   render() {
     let props = this.props
-    let styles = assign({
-        top: props.top,
-        width: props.width,
-        position: 'absolute'
-      }, props.style)
-    let clz = cx(props.className, style[props.effect])
-      return (
-        <div className={style.wrapper}>
-          {do {
-            if (props.overlay) { <Overlay show={props.show} style={props.overlayStyle}/> }
+    let {exitStyle} = props
+    return (
+      <div style={wrapperStyle}>
+        {do {
+          if (props.overlay) { <Overlay show={props.show} style={props.overlayStyle}/> }
+        }}
+        <Transition in={props.show} timeout={300}>
+          {(state) => {
+            let styles = assign({
+              top: props.top,
+              width: props.width,
+              position: 'absolute',
+              transition: 'all 0.3s ease',
+            }, props.style)
+            if (['entered', 'entering'].indexOf(state) === -1) {
+              styles = assign(styles, exitStyle)
+            }
+            return (
+              <div
+                ref={(el) => this.dialog = el}
+                className={props.className}
+                style={{...styles}}>
+                {props.children}
+              </div>
+            )
           }}
-          <TransitionGroup
-            component={FirstChild}
-            transitionAppearTimeout={200}
-            transitionLeaveTimeout={200}
-            transitionName={props.transitionName ? props.transitionName : style}
-            transitionEnterTimeout={200}
-            transitionAppear={true}>
-            {do{
-              if (props.show){
-                <div
-                  ref="dialog"
-                  className={clz}
-                  style={styles}>
-                  {props.children}
-                </div>
-              } else { null }
-            }}
-          </TransitionGroup>
-        </div>
+        </Transition>
+      </div>
     )
   }
 }

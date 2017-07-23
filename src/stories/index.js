@@ -43,7 +43,9 @@ storiesOf('Dialog', module)
       render: function() {
         return (
           <div style={boxStyles}>
-            <Dialog style={dialogStyles} top={60} width={100} show={this.state.show}>
+            <Dialog style={dialogStyles}
+              exitStyle={{transform: 'scale(0.3)'}}
+              top={60} width={100} show={this.state.show}>
               <Close onClick={e => {
                 e.preventDefault()
                 this.setState({
