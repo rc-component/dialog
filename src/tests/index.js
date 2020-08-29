@@ -17,11 +17,11 @@ describe('Button', () => {
     // wrap this with a div.
     const wrapper = mount(
       <div>
-        <Button onClick={ clickMe }>ClickMe</Button>
+        <Button onClick={ clickMe() }>ClickMe</Button>
       </div>
     )
 
-    wrapper.find('button').simulate('click')
+    wrapper.find(Button).simulate('click')
     assert.equal(clickMe.callCount, 1)
   })
 })
