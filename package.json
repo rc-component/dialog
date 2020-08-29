@@ -46,7 +46,6 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "computed-style": "^0.3.0",
-    "enzyme": "^2.9.1",
     "object-assign": "^4.1.0",
     "prop-detect": "^1.1.0",
     "prop-types": "^15.5.10",
